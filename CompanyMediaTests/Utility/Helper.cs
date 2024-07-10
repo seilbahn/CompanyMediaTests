@@ -21,13 +21,9 @@ namespace CompanyMediaTests.Utility
                 {
                     name.Append(DateTime.Now);
                     name.Append(" ");
-                    name.Append(affix);
-                    name.Append(" ");
-                    name.Append(GetUserName());
-                    name.Append(" ");
                     name.Append("Report#");
                     name.Append(new Random().NextInt64());
-                    name.Append(RandomString(random, 7));
+                    name.Append(RandomString(random, 3));
 
                     if (format.Equals(Reports.Txt))
                     {
