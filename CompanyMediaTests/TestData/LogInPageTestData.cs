@@ -2,12 +2,12 @@
 
 namespace CompanyMediaTests.TestData
 {
-    internal static class LogInTestData
+    internal static class LogInPageTestData
     {
-        public static string UserName { get; }
-        public static string Password { get; }
+        internal static string UserName { get; }
+        internal static string Password { get; }
 
-        static LogInTestData()
+        static LogInPageTestData()
         {
             Excel excel = new Excel(MainTestData.ExcelFile);
             UserName = excel.ReadCell("LogInData", 2, 2) ?? "admin";

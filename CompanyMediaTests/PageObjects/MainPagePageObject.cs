@@ -4,11 +4,11 @@ using OpenQA.Selenium;
 
 namespace CompanyMediaTests.PageObjects
 {
-    internal class MainMenuPageObject
+    internal class MainPagePageObject
     {
         private IWebDriver _webDriver;
 
-        public MainMenuPageObject(IWebDriver webDriver)
+        internal MainPagePageObject(IWebDriver webDriver)
         {
             _webDriver = webDriver;
         }

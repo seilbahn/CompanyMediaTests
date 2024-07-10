@@ -1,12 +1,12 @@
 ﻿namespace CompanyMediaTests.Urls
 {
-    internal class CianWebSiteUrls
+    internal class CompanyMediaWebUrls
     {
-        public static string MainPageUrl { get; }
+        public static string LogInPageUrl { get; }
 
-        static CianWebSiteUrls()
+        static CompanyMediaWebUrls()
         {
-            MainPageUrl = @"http://192.168.0.110/cm5div6";
+            LogInPageUrl = @"http://192.168.0.110:8080/cm5div6/";
         }
     }
 }
