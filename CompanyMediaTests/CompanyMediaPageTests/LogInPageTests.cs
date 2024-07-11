@@ -144,6 +144,28 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                       driver.Log.Path));
         }
 
+        [Test, Repeat(1)]
+        public void SubmitBtnClicking()
+        {
+            driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
+            driver.WaitDocumentReadyState();
+
+            for (int i = 0; i < 100; i++)
+            {
+                driver.FindElement(LogInPageLocators._logInButton, true).Click();
+                driver.WaitDocumentReadyState();
+                bool isPresent = driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel);
+                if (!isPresent)
+                {
+                    Assert.Fail("The authorization error message was not found.");
+                    break;
+                }
+            }           
+
+            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel),
+                "The authorization error message was not found.");
+        }
+
         [OneTimeTearDown]
         public void Finalizing()
         {
