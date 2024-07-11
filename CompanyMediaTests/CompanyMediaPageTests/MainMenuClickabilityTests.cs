@@ -1,10 +1,10 @@
-﻿using CompanyMediaTests.PageObjects;
+﻿using CompanyMediaTests.Locators;
+using CompanyMediaTests.PageObjects;
+using CompanyMediaTests.TestData;
 using CompanyMediaTests.Urls;
 using CompanyMediaTests.Utility;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
-using CompanyMediaTests.Locators;
-using CompanyMediaTests.TestData;
+using OpenQA.Selenium.Chrome;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
@@ -55,18 +55,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenSystemStructureWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement systemStructureBreadcrumbsBtn = driver
-                    .FindElement(SystemStructureWindowLocators._systemStructureBreadcrumbsBtn, true);
-                bool isElementPresent = systemStructureBreadcrumbsBtn.Displayed && systemStructureBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {SystemStructureWindowLocators._systemStructureBreadcrumbsBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {SystemStructureWindowLocators._systemStructureBreadcrumbsBtn} was not found.");
-            }
+            By element = SystemStructureWindowLocators._systemStructureBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -75,18 +65,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenOrganizationWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement organizationBreadcrumbsBtn = driver
-                    .FindElement(OrganizationWindowLocators._organizationBreadcrumbsBtn, true);
-                bool isElementPresent = organizationBreadcrumbsBtn.Displayed && organizationBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {OrganizationWindowLocators._organizationBreadcrumbsBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {OrganizationWindowLocators._organizationBreadcrumbsBtn} was not found.");
-            }
+            By element = OrganizationWindowLocators._organizationBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -95,18 +75,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenOrganizationsDataBookWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement organizationDataBookBreadcrumbsBtn = driver
-                    .FindElement(OrganizationsDataBookWindowLocators._organizationsDataBookBreadcrumbsBtn, true);
-                bool isElementPresent = organizationDataBookBreadcrumbsBtn.Displayed && organizationDataBookBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {OrganizationsDataBookWindowLocators._organizationsDataBookBreadcrumbsBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {OrganizationsDataBookWindowLocators._organizationsDataBookBreadcrumbsBtn} was not found.");
-            }
+            By element = OrganizationsDataBookWindowLocators._organizationsDataBookBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -115,18 +85,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenPersonsDataBookWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement personsDataBookBreadcrumbsBtn = driver
-                    .FindElement(PersonsDataBookWindowLocators._personsDataBookBreadcrumbsBtn, true);
-                bool isElementPresent = personsDataBookBreadcrumbsBtn.Displayed && personsDataBookBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {PersonsDataBookWindowLocators._personsDataBookBreadcrumbsBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {PersonsDataBookWindowLocators._personsDataBookBreadcrumbsBtn} was not found.");
-            }
+            By element = PersonsDataBookWindowLocators._personsDataBookBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -135,18 +95,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenClassifiersWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement classifiersBreadcrumbsBtn = driver
-                    .FindElement(ClassifiersWindowLocators._classifiersBreadcrumbsBtn, true);
-                bool isElementPresent = classifiersBreadcrumbsBtn.Displayed && classifiersBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {ClassifiersWindowLocators._classifiersBreadcrumbsBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {ClassifiersWindowLocators._classifiersBreadcrumbsBtn} was not found.");
-            }
+            By element = ClassifiersWindowLocators._classifiersBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -155,18 +105,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenAgentsWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement agentsBreadcrumbsBtn = driver
-                    .FindElement(AgentsWindowLocators._agentsBreadcrumbsBtn, true);
-                bool isElementPresent = agentsBreadcrumbsBtn.Displayed && agentsBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {AgentsWindowLocators._agentsBreadcrumbsBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {AgentsWindowLocators._agentsBreadcrumbsBtn} was not found.");
-            }
+            By element = AgentsWindowLocators._agentsBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -175,18 +115,8 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenReportsWindow();
             driver.WaitDocumentReadyState();
-            try
-            {
-                IWebElement createReportBtn = driver
-                    .FindElement(ReportsWindowLocators._createReportBtn, true);
-                bool isElementPresent = createReportBtn.Displayed && createReportBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {ReportsWindowLocators._createReportBtn} was not found.");
-            }
-            catch
-            {
-                Assert.Fail($"The button {ReportsWindowLocators._createReportBtn} was not found.");
-            }
+            By element = ReportsWindowLocators._createReportBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
         [Test, Repeat(10)]
@@ -195,17 +125,26 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenToolPaletteWindow();
             driver.WaitDocumentReadyState();
-            try
+            By element = ToolPaletteWindowLocators._toolPaletteBreadcrumbsBtn;
+            Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
+        }
+
+        [Test, Repeat(10)]
+        public void ClickOnLeftMainPanelElements()
+        {
+            MainPagePageObject mainPage = new MainPagePageObject(driver);
+            List<Action> couples = [ClickOnSystemStructure, ClickOnOrganization, ClickOnOrganizationsDataBook, ClickOnPersonsDataBook,
+                                    ClickOnClassifiers,  ClickOnAgents, ClickOnReports, ClickOnToolPalette];
+            Random random = new Random();
+
+            for (int i = 0; i < 100; i++)
             {
-                IWebElement toolPaletteBreadcrumbsBtn = driver
-                    .FindElement(ToolPaletteWindowLocators._toolPaletteBreadcrumbsBtn, true);
-                bool isElementPresent = toolPaletteBreadcrumbsBtn.Displayed && toolPaletteBreadcrumbsBtn.Enabled;
-                Assert.That(isElementPresent, Is.EqualTo(true),
-                    $"The button {ToolPaletteWindowLocators._toolPaletteBreadcrumbsBtn} was not found.");
+                couples[i % couples.Count]();
             }
-            catch
+
+            for (int i = 0; i < 10; i++)
             {
-                Assert.Fail($"The button {ToolPaletteWindowLocators._toolPaletteBreadcrumbsBtn} was not found.");
+                couples[random.Next(0, couples.Count)]();
             }
         }
 

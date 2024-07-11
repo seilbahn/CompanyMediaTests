@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
+using CompanyMediaTests.Utility;
 
 namespace CompanyMediaTests
 {
@@ -36,6 +37,20 @@ namespace CompanyMediaTests
             _ = Manage().Timeouts().ImplicitWait;
             WebDriverWait wait = new WebDriverWait(this, TimeSpan.FromSeconds(10));
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
+        public bool IsElementPresent(By localor)
+        {
+            try
+            {
+                IWebElement webElement = this.FindElement(localor, true);
+                return webElement.Displayed && webElement.Enabled;
+            }
+            catch (NoSuchElementException nse)
+            {
+                Log.Logger.Error($"The web element {localor} was not found. {nse.Message}");
+                throw new NoSuchElementException(nse.Message);
+            }            
         }
 
         private void Driver_Navigating(object? sender, WebDriverNavigationEventArgs e)
