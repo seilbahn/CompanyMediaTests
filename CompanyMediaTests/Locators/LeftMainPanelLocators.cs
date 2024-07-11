@@ -17,5 +17,6 @@ namespace CompanyMediaTests.Locators
         internal static readonly By _AgentsBtn = By.XPath("//span[text()='Агенты']");
         internal static readonly By _ReportsBtn = By.XPath("//span[text()='Отчёты']");
         internal static readonly By _ToolPaletteBtn = By.XPath("//span[text()='Палитра инструментов']");
+        internal static readonly By _PinBtn = By.XPath("//div[contains(@class, 'pin')]");
     }
 }
