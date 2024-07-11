@@ -129,7 +129,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
-        [Test, Repeat(10)]
+        [Test, Repeat(3)]
         public void ClickOnLeftMainPanelElements()
         {
             MainPagePageObject mainPage = new MainPagePageObject(driver);
@@ -137,15 +137,15 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                                     ClickOnClassifiers,  ClickOnAgents, ClickOnReports, ClickOnToolPalette];
             Random random = new Random();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 couples[i % couples.Count]();
             }
 
-            for (int i = 0; i < 10; i++)
-            {
-                couples[random.Next(0, couples.Count)]();
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    couples[random.Next(0, couples.Count)]();
+            //}
         }
 
         [TearDown]

@@ -1,10 +1,10 @@
-﻿using CompanyMediaTests.PageObjects;
+﻿using CompanyMediaTests.Locators;
+using CompanyMediaTests.PageObjects;
+using CompanyMediaTests.TestData;
 using CompanyMediaTests.Urls;
 using CompanyMediaTests.Utility;
-using CompanyMediaTests.TestData;
-using CompanyMediaTests.Locators;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
@@ -84,7 +84,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             logInPage.LogIn(new LogInPageTestData(false).UserName, new LogInPageTestData(false).Password);
             driver.WaitDocumentReadyState();
 
-            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel), 
+            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel),
                 "The authorization error message was not found.");
         }
 
@@ -130,21 +130,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                 "The authorization error message was not found.");
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Log.Logger.Information($"Final. Method name: {TestContext.CurrentContext.Test.FullName}");
-            webDriver.Dispose();
-            driver.Dispose();
-
-            units.Add((TestContext.CurrentContext.Test.Name,
-                      TestContext.CurrentContext.CurrentRepeatCount,
-                      TestContext.CurrentContext.Test.Name,
-                      TestContext.CurrentContext.Result.Outcome.ToString()!,
-                      driver.Log.Path));
-        }
-
-        [Test, Repeat(1)]
+        [Test, Repeat(10)]
         public void SubmitBtnClicking()
         {
             driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
@@ -160,10 +146,24 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                     Assert.Fail("The authorization error message was not found.");
                     break;
                 }
-            }           
+            }
 
             Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel),
                 "The authorization error message was not found.");
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            driver.Log.Logger.Information($"Final. Method name: {TestContext.CurrentContext.Test.FullName}");
+            webDriver.Dispose();
+            driver.Dispose();
+
+            units.Add((TestContext.CurrentContext.Test.Name,
+                      TestContext.CurrentContext.CurrentRepeatCount,
+                      TestContext.CurrentContext.Test.Name,
+                      TestContext.CurrentContext.Result.Outcome.ToString()!,
+                      driver.Log.Path));
         }
 
         [OneTimeTearDown]
