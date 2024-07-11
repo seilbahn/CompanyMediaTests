@@ -44,32 +44,90 @@ namespace CompanyMediaTests.CompanyMediaPageTests
         }
 
         [Test, Repeat(10)]
-        public void LogIn()
+        public void ValidUserLogIn()
         {
             driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
             driver.WaitDocumentReadyState();
+
             LogInPagePageObject logInPage = new LogInPagePageObject(driver);
-            logInPage.LogIn(LogInPageTestData.UserName, LogInPageTestData.Password);
+            logInPage.LogIn(new LogInPageTestData(true).UserName, new LogInPageTestData(true).Password);
             driver.WaitDocumentReadyState();
-            WaitUntil.WaitElement(driver, LeftMainPanelLocators._userBtn);
+
             IWebElement userButton = driver.FindElement(LeftMainPanelLocators._userBtn, true);
             userButton.Click();
-            IWebElement login = driver.FindElement(LeftMainPanelLocators._loginInformationLabel, true);
-            IWebElement name = driver.FindElement(LeftMainPanelLocators._nameInformationLabel, true);
-            IWebElement surname = driver.FindElement(LeftMainPanelLocators._surnameInformationLabel, true);
-            IWebElement email = driver.FindElement(LeftMainPanelLocators._emailInformationLabel, true);
-            string actualLogin = login.Text.Substring(7);
-            string actualName = name.Text.Substring(5);
-            string actualSurname = surname.Text.Substring(8);
-            string actualEmail = email.Text.Substring(7);
-            Assert.That(actualLogin, Is.EqualTo(MainPageTestData.Login),
-                        "The expected and the actual logins are not equal.");            
-            Assert.That(actualName, Is.EqualTo(MainPageTestData.Name),
-                        "The expected and the actual names are not equal.");            
-            Assert.That(actualSurname, Is.EqualTo(MainPageTestData.Surname),
-                        "The expected and the actual surnames are not equal.");            
-            Assert.That(actualEmail, Is.EqualTo(MainPageTestData.Email),
-                        "The expected and the actual emails are not equal.");
+
+            string actualLogin = driver.FindElement(LeftMainPanelLocators._loginInformationLabel, true).Text[7..];
+            string actualName = driver.FindElement(LeftMainPanelLocators._nameInformationLabel, true).Text[5..];
+            string actualSurname = driver.FindElement(LeftMainPanelLocators._surnameInformationLabel, true).Text[8..];
+            string actualEmail = driver.FindElement(LeftMainPanelLocators._emailInformationLabel, true).Text[7..];
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(actualLogin, Is.EqualTo(MainPageTestData.Login),
+                             "The expected and the actual logins are not equal.");
+                Assert.That(actualName, Is.EqualTo(MainPageTestData.Name),
+                            "The expected and the actual names are not equal.");
+                Assert.That(actualSurname, Is.EqualTo(MainPageTestData.Surname),
+                            "The expected and the actual surnames are not equal.");
+                Assert.That(actualEmail, Is.EqualTo(MainPageTestData.Email),
+                            "The expected and the actual emails are not equal.");
+            });
+        }
+
+        [Test, Repeat(10)]
+        public void InvalidUserLogIn()
+        {
+            driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
+            driver.WaitDocumentReadyState();
+
+            LogInPagePageObject logInPage = new LogInPagePageObject(driver);
+            logInPage.LogIn(new LogInPageTestData(false).UserName, new LogInPageTestData(false).Password);
+            driver.WaitDocumentReadyState();
+
+            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel), 
+                "The authorization error message was not found.");
+        }
+
+        [Test, Repeat(10)]
+        public void EmptyDataLogIn()
+        {
+            driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
+            driver.WaitDocumentReadyState();
+
+            LogInPagePageObject logInPage = new LogInPagePageObject(driver);
+            logInPage.LogIn(string.Empty, string.Empty);
+            driver.WaitDocumentReadyState();
+
+            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel),
+                "The authorization error message was not found.");
+        }
+
+        [Test, Repeat(10)]
+        public void TrueLoginFalsePasswordLogIn()
+        {
+            driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
+            driver.WaitDocumentReadyState();
+
+            LogInPagePageObject logInPage = new LogInPagePageObject(driver);
+            logInPage.LogIn(new LogInPageTestData(true).UserName, new LogInPageTestData(false).Password);
+            driver.WaitDocumentReadyState();
+
+            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel),
+                "The authorization error message was not found.");
+        }
+
+        [Test, Repeat(10)]
+        public void FalseLoginTruePasswordLogIn()
+        {
+            driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
+            driver.WaitDocumentReadyState();
+
+            LogInPagePageObject logInPage = new LogInPagePageObject(driver);
+            logInPage.LogIn(new LogInPageTestData(false).UserName, new LogInPageTestData(true).Password);
+            driver.WaitDocumentReadyState();
+
+            Assert.That(driver.IsElementPresent(LogInPageLocators._authErrorMsgLabel),
+                "The authorization error message was not found.");
         }
 
         [TearDown]

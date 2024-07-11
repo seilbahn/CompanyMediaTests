@@ -45,7 +45,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
             driver.WaitDocumentReadyState();
             LogInPagePageObject logInPage = new LogInPagePageObject(driver);
-            logInPage.LogIn(LogInPageTestData.UserName, LogInPageTestData.Password);
+            logInPage.LogIn(new LogInPageTestData(true).UserName, new LogInPageTestData(true).Password);
             driver.WaitDocumentReadyState();
         }
 
