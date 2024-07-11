@@ -17,11 +17,10 @@ namespace CompanyMediaTests.PageObjects
         internal SystemStructureWindowPageObject OpenApps()
         {
             _webDriver.FindElement(LeftMainPanelLocators._SystemStructureBtn, true).Click();
-            _webDriver.FindElement(LeftMainPanelLocators._PinBtn, true).Click();
-
-            IWebElement element = _webDriver.FindElement(LeftMainPanelLocators._PinBtn);
-            ((IJavaScriptExecutor)_webDriver).ExecuteScript("arguments[0].click();", element);
-            //_webDriver.FindElement(SystemStructureWindowLocators._appsBtn, true).Click();
+            //_webDriver.FindElement(LeftMainPanelLocators._PinBtn, true).Click();
+            //IWebElement element = _webDriver.FindElement(SystemStructureWindowLocators._appsBtn, true);            
+            //((IJavaScriptExecutor)_webDriver).ExecuteScript("arguments[0].click();", element);
+            _webDriver.FindElement(SystemStructureWindowLocators._appsBtn, true).Click();
 
             return new SystemStructureWindowPageObject(_webDriver);
         }
@@ -41,7 +40,12 @@ namespace CompanyMediaTests.PageObjects
             if (_webDriver.FindElement(SystemStructureWindowLocators._nonSysModuleChkBox, true).Selected)
             {
                 _webDriver.FindElement(SystemStructureWindowLocators._nonSysModuleChkBox, true).Click();
-            }           
+            }
+            
+            if (testData.NonSysModule)
+            {
+                _webDriver.FindElement(SystemStructureWindowLocators._nonSysModuleChkBox, true).Click();
+            }
 
             _webDriver.FindElement(SystemStructureWindowLocators._basicModuleTypeDropDownList, true).Click();
             xpath = $"//td[text()='{testData.BasicModuleType}']";
@@ -64,6 +68,11 @@ namespace CompanyMediaTests.PageObjects
             _webDriver.FindElement(SystemStructureWindowLocators._fileNameInput).SendKeys(testData.FileName);
 
             if (_webDriver.FindElement(SystemStructureWindowLocators._namedAppChkBox, true).Selected)
+            {
+                _webDriver.FindElement(SystemStructureWindowLocators._namedAppChkBox, true).Click();
+            }
+
+            if (testData.NamedApp)
             {
                 _webDriver.FindElement(SystemStructureWindowLocators._namedAppChkBox, true).Click();
             }

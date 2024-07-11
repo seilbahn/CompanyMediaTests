@@ -5,6 +5,7 @@ using CompanyMediaTests.Urls;
 using CompanyMediaTests.Utility;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Xml.Linq;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
@@ -53,14 +54,21 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             driver.WaitDocumentReadyState();
         }
 
-        [Test, Repeat(1)]
+        [Test, Repeat(10)]
         public void CreateApps()
         {
             SystemStructureWindowPageObject systemStructure = new SystemStructureWindowPageObject(driver);
             systemStructure.OpenApps();
 
-            SystemStructureWindowTestData testData = new SystemStructureWindowTestData();
+            SystemStructureWindowTestData testData = new SystemStructureWindowTestData(new Random().Next(0, 4));
+            testData.Name += Helper.RandomString(new Random(), 7);
+            testData.PackageName += Helper.RandomString(new Random(), 7);
+            testData.FileName += Helper.RandomString(new Random(), 7);
             systemStructure.CreateApp(testData);
+
+            string xpath = $"//div[@style='outline-style:none;' and .//div[.='{testData.Name}']]";
+            IWebElement item = driver.FindElement(By.XPath(xpath), true);
+            Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
         }
 
         [TearDown]
