@@ -8,6 +8,10 @@ using OpenQA.Selenium.Chrome;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
+    /// <summary>
+    /// Автотесты для веб-страницы http://IPv4:8080/cm5div6/Login.html. 
+    /// Только автотесты для авторизации.
+    /// </summary>
     internal class LogInPageTests
     {
         private IWebDriver webDriver;
@@ -43,6 +47,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             driver.Manage().Window.Maximize();
         }
 
+        /// <summary>
+        /// Авторизация с действительным именем пользователя и действительным паролем.
+        /// После авторизации открывается страница http://IPv4:8080/cm5div6/BusinessUniverse.html.
+        /// </summary>
         [Test, Repeat(10)]
         public void ValidUserLogIn()
         {
@@ -74,6 +82,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             });
         }
 
+        /// <summary>
+        /// Попытка авторизации с недействительным именем пользователя и недействительным паролем.
+        /// Выходит ошибка авторизации.
+        /// </summary>
         [Test, Repeat(10)]
         public void InvalidUserLogIn()
         {
@@ -88,6 +100,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                 "The authorization error message was not found.");
         }
 
+        /// <summary>
+        /// Попытка авторизации без ввода имени пользователя и без ввода пароля.
+        /// Выходит ошибка авторизации.
+        /// </summary>
         [Test, Repeat(10)]
         public void EmptyDataLogIn()
         {
@@ -102,6 +118,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                 "The authorization error message was not found.");
         }
 
+        /// <summary>
+        /// Попытка авторизации с действительным именем пользователя и недействительным паролем.
+        /// Выходит ошибка авторизации.
+        /// </summary>
         [Test, Repeat(10)]
         public void TrueLoginFalsePasswordLogIn()
         {
@@ -116,6 +136,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                 "The authorization error message was not found.");
         }
 
+        /// <summary>
+        /// Попытка авторизации с недействительным именем пользователя и действительным паролем.
+        /// Выходит ошибка авторизации.
+        /// </summary>
         [Test, Repeat(10)]
         public void FalseLoginTruePasswordLogIn()
         {
@@ -130,6 +154,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                 "The authorization error message was not found.");
         }
 
+        /// <summary>
+        /// Попытка авторизации без ввода имени пользователя и пароля, только нажимая клавишу «Войти».
+        /// Выходит ошибка авторизации.
+        /// </summary>
         [Test, Repeat(10)]
         public void SubmitBtnClicking()
         {

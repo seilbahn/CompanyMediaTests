@@ -1,14 +1,15 @@
-﻿using CompanyMediaTests.Locators;
-using CompanyMediaTests.PageObjects;
+﻿using CompanyMediaTests.PageObjects;
 using CompanyMediaTests.TestData;
 using CompanyMediaTests.Urls;
 using CompanyMediaTests.Utility;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Xml.Linq;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
+    /// <summary>
+    /// Автотесты для окна Структура Системы -> Приложения.    /// 
+    /// </summary>
     internal class SystemStructureWindowTests
     {
         private IWebDriver webDriver;
@@ -54,6 +55,11 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             driver.WaitDocumentReadyState();
         }
 
+        /// <summary>
+        /// Создание одного элемента из блока «Приложения».
+        /// Открывается окно создания, заполняются данные, нажимается кнопка «Сохранить и Закрыть».
+        /// После создания проверяется, появился ли созданный элемент в таблице «Приложения».
+        /// </summary>
         [Test, Repeat(10)]
         public void CreateApps()
         {

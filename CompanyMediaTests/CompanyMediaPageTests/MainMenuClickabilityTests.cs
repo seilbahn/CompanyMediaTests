@@ -8,7 +8,11 @@ using OpenQA.Selenium.Chrome;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
-    public class MenuElementsClickabilityTests
+    /// <summary>
+    /// Автотесты для веб-страницы http://IPv4:8080/cm5div6/BusinessUniverse.html. 
+    /// Автотесты на кликабельность элементов на левой панели.
+    /// </summary>
+    internal class MenuElementsClickabilityTests
     {
         private IWebDriver webDriver;
         private Driver driver;
@@ -49,6 +53,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             driver.WaitDocumentReadyState();
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Структура Системы» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Структура Системы».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnSystemStructure()
         {
@@ -59,6 +67,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Организация» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Организация».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnOrganization()
         {
@@ -69,6 +81,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Справочник организаций» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Справочник организаций».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnOrganizationsDataBook()
         {
@@ -79,6 +95,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Справочник персон» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Справочник персон».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnPersonsDataBook()
         {
@@ -89,6 +109,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Классификаторы» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Классификаторы».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnClassifiers()
         {
@@ -99,6 +123,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Агенты» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Агенты».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnAgents()
         {
@@ -109,6 +137,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Отчеты» на левой панели элементов.
+        /// Открывается окно с кнопкой «Создать Отчет».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnReports()
         {
@@ -119,6 +151,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Нажатие на клавишу «Палитра инструментов» на левой панели элементов.
+        /// Открывается окно с данными первой (под)категории. В начале навигационной цепочки находится «Палитра инструментов».
+        /// </summary>
         [Test, Repeat(10)]
         public void ClickOnToolPalette()
         {
@@ -129,6 +165,13 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
+        /// <summary>
+        /// Поочередное нажатие на все 8 элементов («Структура Системы», «Организация», «Справочник организаций», 
+        /// «Справочник персон», «Классификаторы», «Агенты», «Отчеты», «Палитра инструментов») левой панели элементов.
+        /// При нажатии на элемент открывается окно с данными первой (под)категории, для элемента «Отчеты» открывается окно 
+        /// с кнопкой «Создать Отчет». (Повтор всех вышенаписанных тестов).
+        /// !!! Ошибки
+        /// </summary>
         [Test, Repeat(3)]
         public void ClickOnLeftMainPanelElements()
         {

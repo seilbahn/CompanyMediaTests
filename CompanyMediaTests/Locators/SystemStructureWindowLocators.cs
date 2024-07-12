@@ -46,4 +46,5 @@ namespace CompanyMediaTests.Locators
         internal static readonly By _storageDropDownListItem = By.XPath("//td[@class='item' and @role='menuitem' and text()='AF5']");
 
         internal static readonly By _saveAndCloseBtn = By.XPath("//a[@class='action-bar-button' and text()='Сохранить и Закрыть']");
-    }}
+    }
+}
