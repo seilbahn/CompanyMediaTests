@@ -97,16 +97,16 @@ namespace CompanyMediaTests.PageObjects
 
         internal SSWinPageObject CreateOrgsApps(SSWinOrgsAppsTestData testData)
         {
-            //IWebElement element = _webDriver.FindElement(SSWinLocators._applicationSearchBoxInput, true);
-            //Actions actions = new Actions(_webDriver);
-            //actions.MoveToElement(element).SendKeys(Keys.Enter).Perform(); 
+            // Sometimes it helps:
+            // IWebElement element = _webDriver.FindElement(SSWinLocators._applicationSearchBoxInput, true);
+            // Actions actions = new Actions(_webDriver);
+            // actions.MoveToElement(element).SendKeys(Keys.Enter).Perform(); 
 
             _webDriver.FindElement(SSWinLocators._createBtn, true).Click();
-            _webDriver.FindElement(SSWinLocators._organizationDropDownList, true).Click();
-            _webDriver.FindElement(SSWinLocators._organizationDropDownList, true).Click();
+            _webDriver.FindElement(SSWinLocators._organizationInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._organizationInput, true).SendKeys(testData.Organization);
             string xpath = $"//td[text()='{testData.Organization}']";
             _webDriver.FindElement(By.XPath(xpath), true).Click();
-            _webDriver.FindElement(SSWinLocators._applicationInput, true).Click();
             _webDriver.FindElement(SSWinLocators._applicationInput, true).Click();
             _webDriver.FindElement(SSWinLocators._applicationInput, true).SendKeys(testData.App);
             xpath = $"//td[contains (text(), '{testData.App}')]";
@@ -127,13 +127,9 @@ namespace CompanyMediaTests.PageObjects
             }
             catch (StaleElementReferenceException ex)
             {
-                WaitUntil.WaitSomeInterval(3);
-
                 IWebElement element = _webDriver.FindElement(SSWinLocators._applicationSearchBoxInput, true);
                 Actions actions = new Actions(_webDriver);
                 actions.MoveToElement(element).SendKeys(Keys.Enter).Perform(); 
-
-                //_webDriver.FindElement(SSWinLocators._applicationSearchBoxInput, true).SendKeys(Keys.Enter);
             }
             _webDriver.FindElement(By.XPath($"//div[@style='outline-style:none;' and .//div[.='{testData.App}']]"), true).Click();
             _webDriver.FindElement(SSWinLocators._deleteBtn, true).Click();

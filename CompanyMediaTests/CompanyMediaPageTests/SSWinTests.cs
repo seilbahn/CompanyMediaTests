@@ -79,7 +79,13 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
         }
 
-        [Test, Repeat(10)]
+        /// <summary>
+        /// Создание одного элемента из блока «Приложения организаций».
+        /// Открывается окно создания, заполняются данные, нажимается кнопка «Сохранить и Закрыть».
+        /// После создания проверяется, появился ли созданный элемент в таблице «Приложения организаций».
+        /// После проверки созданное приложение удаляется.
+        /// </summary>
+        [Test, Repeat(100)]
         public void CreateDeleteOrgsApps()
         {
             SSWinPageObject systemStructure = new SSWinPageObject(driver);

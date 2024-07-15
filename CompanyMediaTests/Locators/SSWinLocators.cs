@@ -57,6 +57,7 @@ namespace CompanyMediaTests.Locators
 
         // Локаторы для подкатегории «Приложения организаций»
         internal static readonly By _organizationDropDownList = _typeDropDownList;
+        internal static readonly By _organizationInput = By.XPath("(//input[@type='text' and contains(@class, 'gwt-SuggestBox')])[1]");
         internal static readonly By _applicationDropDownList = _basicModuleTypeDropDownList;
         internal static readonly By _applicationInput = By.XPath("(//input[@type='text' and contains(@class, 'gwt-SuggestBox')])[2]");
         internal static readonly By _applicationSearchBoxInput = By.XPath("(//input[@type='text' and @class='search-box'])[1]");
