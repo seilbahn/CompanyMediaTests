@@ -1,16 +1,18 @@
-﻿using CompanyMediaTests.PageObjects;
+﻿using CompanyMediaTests.Locators;
+using CompanyMediaTests.PageObjects;
 using CompanyMediaTests.TestData;
 using CompanyMediaTests.Urls;
 using CompanyMediaTests.Utility;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 
 namespace CompanyMediaTests.CompanyMediaPageTests
 {
     /// <summary>
     /// Автотесты для окна Структура Системы -> Приложения.    /// 
     /// </summary>
-    internal class SystemStructureWindowTests
+    internal class SSWinTests
     {
         private IWebDriver webDriver;
         private Driver driver;
@@ -63,10 +65,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
         [Test, Repeat(10)]
         public void CreateApps()
         {
-            SystemStructureWindowPageObject systemStructure = new SystemStructureWindowPageObject(driver);
+            SSWinPageObject systemStructure = new SSWinPageObject(driver);
             systemStructure.OpenApps();
 
-            SystemStructureWindowTestData testData = new SystemStructureWindowTestData(new Random().Next(0, 4));
+            SSWinAppsTestData testData = new SSWinAppsTestData(new Random().Next(0, 4));
             testData.Name += Helper.RandomString(new Random(), 7);
             testData.PackageName += Helper.RandomString(new Random(), 7);
             testData.FileName += Helper.RandomString(new Random(), 7);
@@ -75,6 +77,29 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             string xpath = $"//div[@style='outline-style:none;' and .//div[.='{testData.Name}']]";
             IWebElement item = driver.FindElement(By.XPath(xpath), true);
             Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
+        }
+
+        [Test, Repeat(10)]
+        public void CreateDeleteOrgsApps()
+        {
+            SSWinPageObject systemStructure = new SSWinPageObject(driver);
+            systemStructure.OpenOrgsApps();
+
+            SSWinOrgsAppsTestData testData = new SSWinOrgsAppsTestData(new Random().Next(0, 4));
+            systemStructure.CreateOrgsApps(testData);
+
+            driver.FindElement(SSWinLocators._applicationSearchBoxInput, true).SendKeys(testData.App);
+            IWebElement element = driver.FindElement(SSWinLocators._applicationSearchBoxInput, true);
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(element).SendKeys(Keys.Enter).Perform();
+            string xpath = $"//div[@style='outline-style:none;' and .//div[.='{testData.App}']]";
+            IWebElement item = driver.FindElement(By.XPath(xpath), true);
+            Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
+
+            systemStructure.OpenOrgsApps();
+            driver.FindElement(SSWinLocators._applicationSearchBoxInput, true).Click();
+            driver.FindElement(SSWinLocators._applicationSearchBoxInput, true).Clear();           
+            systemStructure.DeleteOrgsApp(testData);
         }
 
         [TearDown]

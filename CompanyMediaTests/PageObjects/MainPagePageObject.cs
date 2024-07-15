@@ -13,11 +13,11 @@ namespace CompanyMediaTests.PageObjects
             _webDriver = webDriver;
         }
 
-        internal SystemStructureWindowPageObject OpenSystemStructureWindow()
+        internal SSWinPageObject OpenSystemStructureWindow()
         {
             _webDriver.FindElement(LeftMainPanelLocators._SystemStructureBtn, true).Click();
 
-            return new SystemStructureWindowPageObject(_webDriver);
+            return new SSWinPageObject(_webDriver);
         }
 
         internal OrganizationWindowPageObject OpenOrganizationWindow()

@@ -52,7 +52,7 @@ namespace CompanyMediaTests
                 throw new NoSuchElementException(nse.Message);
             }            
         }
-
+        
         private void Driver_Navigating(object? sender, WebDriverNavigationEventArgs e)
         {
             Log.Logger.Information($"Navigating to {e.Url}");

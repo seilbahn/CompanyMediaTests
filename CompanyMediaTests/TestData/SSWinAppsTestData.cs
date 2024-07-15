@@ -2,7 +2,7 @@
 
 namespace CompanyMediaTests.TestData
 {
-    internal class SystemStructureWindowTestData
+    internal class SSWinAppsTestData
     {
         internal string Type { get; set; }
         internal string Name { get; set; }
@@ -15,7 +15,7 @@ namespace CompanyMediaTests.TestData
         internal bool NamedApp { get; set; }
         internal string Storage { get; set; }
 
-        internal SystemStructureWindowTestData(int counter = 0)
+        internal SSWinAppsTestData(int counter = 0)
         {
             Excel excel = new Excel(MainTestData.ExcelFile);
             counter += 2;

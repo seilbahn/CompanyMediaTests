@@ -9,6 +9,7 @@ namespace CompanyMediaTests.Utility
         public Reporter(string path)
         {
             ExcelFilePath = path;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using ExcelPackage excelPackage = new ExcelPackage();
             ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets.Add("Report information");
             workSheet.Cells[1, 1].Value = $"The report was generated automatically at {DateTime.Now}";

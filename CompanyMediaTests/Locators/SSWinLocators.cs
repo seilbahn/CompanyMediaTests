@@ -2,15 +2,23 @@
 
 namespace CompanyMediaTests.Locators
 {
-    internal class SystemStructureWindowLocators
+    internal class SSWinLocators
     {
         internal static readonly By _systemStructureBreadcrumbsBtn = By.XPath("//a[@href='#link=SS']");
+
+        internal static readonly By _errorDialogWindow = By.XPath("//div[@class='errorDialogWindow']");
+        internal static readonly By _errorDialogOKBtn = By.XPath("//button[@type='button' and @class='darkButton' and text()='ОК']");
+        internal static readonly By _confirmDialogOKBtn = By.XPath("//button[@type='button' and @class='darkButton' and text()='ОК']");
+
         internal static readonly By _appsBtn = By.XPath("//div[@class='treeItemTitle' and text()='Приложения']");
+        internal static readonly By _orgsAppsBtn = By.XPath("//div[@class='treeItemTitle' and text()='Приложения организаций']");
+
         internal static readonly By _renewBtn = By.XPath("//a[@class='action-bar-button' and text()='Обновить']");
         internal static readonly By _createBtn = By.XPath("//a[@class='action-bar-button' and text()='Создать']");
         internal static readonly By _editBtn = By.XPath("//a[@class='action-bar-button' and text()='Редактировать']");
         internal static readonly By _deleteBtn = By.XPath("//a[@class='action-bar-button' and text()='Удалить']");
 
+        // Локаторы для подкатегории «Приложения»
         // Only as a example for the first line that named as 'Test Doc Projects':
         internal static readonly By _tableLine = By.XPath("//div[@style='outline-style:none;' and .//div[.='Test Doc Projects']]");
 
@@ -46,5 +54,12 @@ namespace CompanyMediaTests.Locators
         internal static readonly By _storageDropDownListItem = By.XPath("//td[@class='item' and @role='menuitem' and text()='AF5']");
 
         internal static readonly By _saveAndCloseBtn = By.XPath("//a[@class='action-bar-button' and text()='Сохранить и Закрыть']");
+
+        // Локаторы для подкатегории «Приложения организаций»
+        internal static readonly By _organizationDropDownList = _typeDropDownList;
+        internal static readonly By _applicationDropDownList = _basicModuleTypeDropDownList;
+        internal static readonly By _applicationInput = By.XPath("(//input[@type='text' and contains(@class, 'gwt-SuggestBox')])[2]");
+        internal static readonly By _applicationSearchBoxInput = By.XPath("(//input[@type='text' and @class='search-box'])[1]");
+        internal static readonly By _organizationSearchBoxInput = By.XPath("(//input[@type='text' and @class='search-box'])[2]");
     }
 }

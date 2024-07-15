@@ -63,7 +63,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             MainPagePageObject mainPage = new MainPagePageObject(driver);
             mainPage.OpenSystemStructureWindow();
             driver.WaitDocumentReadyState();
-            By element = SystemStructureWindowLocators._systemStructureBreadcrumbsBtn;
+            By element = SSWinLocators._systemStructureBreadcrumbsBtn;
             Assert.That(driver.IsElementPresent(element), Is.EqualTo(true), $"{element} was not found.");
         }
 
