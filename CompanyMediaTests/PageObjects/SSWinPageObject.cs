@@ -187,5 +187,76 @@ namespace CompanyMediaTests.PageObjects
 
             return new SSWinPageObject(_webDriver);
         }
+
+        internal SSWinPageObject OpenClientsSettings()
+        {
+            _webDriver.FindElement(LeftMainPanelLocators._SystemStructureBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._ClientsSettingsBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
+
+        internal SSWinPageObject CreateClientsSettings(SSWinCreateClientsAppSettingsTestData testData)
+        {
+            _webDriver.FindElement(SSWinLocators._createBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._сlientsSettingsAppInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._сlientsSettingsAppInput, true).SendKeys(testData.App);
+            string xpath = $"//td[contains(text(),'{testData.App}')]";
+            _webDriver.FindElement(By.XPath(xpath), true).Click();
+            _webDriver.FindElement(SSWinLocators._сlientsSettingsTypeInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._сlientsSettingsTypeInput, true).SendKeys(testData.ClientsAppType);
+            _webDriver.FindElement(SSWinLocators._saveBtn, true).Click();
+            WaitUntil.WaitSomeInterval(1);
+            _webDriver.FindElement(SSWinLocators._closeBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
+
+        internal SSWinPageObject OpenTerr()
+        {
+            _webDriver.FindElement(LeftMainPanelLocators._SystemStructureBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._TerrBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
+
+        internal SSWinPageObject CreateTerr(SSWinCreateTerrTestData testData)
+        {
+            _webDriver.FindElement(SSWinLocators._createBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._terrOrganizationInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._terrOrganizationInput, true).SendKeys(testData.Organization);
+            string xpath = $"//td[contains(text(),'{testData.Organization}')]";
+            _webDriver.FindElement(By.XPath(xpath), true).Click();
+            _webDriver.FindElement(SSWinLocators._terrIdentifierInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._terrIdentifierInput, true).SendKeys(testData.Identifier);
+            _webDriver.FindElement(SSWinLocators._terrNameInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._terrNameInput, true).SendKeys(testData.Name);
+            if (testData.IsCentral)
+            {
+                _webDriver.FindElement(SSWinLocators._terrIsCentralChkBox, true).Click();
+            }
+            _webDriver.FindElement(SSWinLocators._terrPrefixInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._terrPrefixInput, true).SendKeys(testData.Prefix);
+            _webDriver.FindElement(SSWinLocators._terrTimeZoneSettingsBtn, true).Click();
+
+            if (testData.IsCentralTerrTimeZoneUsed)
+            {
+                _webDriver.FindElement(SSWinLocators._terrIsCentralTerrTimeZoneUsedChkBox, true).Click();
+            }
+            else
+            {
+                _webDriver.FindElement(SSWinLocators._terrTimeZoneInput, true).Click();
+                _webDriver.FindElement(SSWinLocators._terrTimeZoneInput, true).SendKeys(testData.TimeZone);
+                _webDriver.FindElement(SSWinLocators._terrHeadingListBox, true).Click();
+                xpath = $"//option[@value='{testData.Heading}']";
+                _webDriver.FindElement(By.XPath(xpath), true).Click();
+            }
+
+            _webDriver.FindElement(SSWinLocators._saveBtn, true).Click();
+            WaitUntil.WaitSomeInterval(1);
+            _webDriver.FindElement(SSWinLocators._closeBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
     }
 }

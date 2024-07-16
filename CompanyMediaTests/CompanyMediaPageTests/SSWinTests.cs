@@ -140,10 +140,52 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             SSWinPageObject systemStructure = new SSWinPageObject(driver);
             systemStructure.OpenWSS();
 
-            SSWinOrgsCreateWSSTestData testData = new SSWinOrgsCreateWSSTestData(new Random().Next(0, 2));
+            SSWinOrgsCreateWSSTestData testData = new SSWinOrgsCreateWSSTestData(new Random().Next(0, 3));
             systemStructure.CreateWSS(testData);
 
             string xpath = $"(//div[@style='outline-style:none;' and .//div[.='{testData.App}']])[1]";
+            IWebElement item = driver.FindElement(By.XPath(xpath), true);
+            Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
+        }
+
+        /// <summary>
+        /// Создание одного элемента из блока «Настройки клиентских приложений».
+        /// Открывается окно создания, заполняются данные, нажимается кнопка «Сохранить», а затем «Закрыть».
+        /// После создания проверяется, появился ли созданный элемент в таблице «Настройки клиентских приложений».
+        /// </summary>
+        [Test, Repeat(10)]
+        public void CreateClientsSettings()
+        {
+            SSWinPageObject systemStructure = new SSWinPageObject(driver);
+            systemStructure.OpenClientsSettings();
+
+            SSWinCreateClientsAppSettingsTestData testData = new SSWinCreateClientsAppSettingsTestData(new Random().Next(0, 3));
+            testData.ClientsAppType += Helper.RandomString(new Random(), 7);
+            systemStructure.CreateClientsSettings(testData);
+
+            string xpath = $"(//div[@style='outline-style:none;' and .//div[.='{testData.ClientsAppType}']])[1]";
+            IWebElement item = driver.FindElement(By.XPath(xpath), true);
+            Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
+        }
+
+        /// <summary>
+        /// Создание одного элемента из блока «Территории».
+        /// Открывается окно создания, заполняются данные, нажимается кнопка «Сохранить», а затем «Закрыть».
+        /// После создания проверяется, появился ли созданный элемент в таблице «Настройки клиентских приложений».
+        /// </summary>
+        [Test, Repeat(1)]
+        public void CreateTerr()
+        {
+            SSWinPageObject systemStructure = new SSWinPageObject(driver);
+            systemStructure.OpenTerr();
+
+            SSWinCreateTerrTestData testData = new SSWinCreateTerrTestData(new Random().Next(0, 11));
+
+            testData.Identifier += Helper.RandomString(new Random(), 7);
+            testData.Name += Helper.RandomString(new Random(), 7);
+            systemStructure.CreateTerr(testData);
+
+            string xpath = $"(//div[@style='outline-style:none;' and .//div[.='{testData.Identifier}']])[1]";
             IWebElement item = driver.FindElement(By.XPath(xpath), true);
             Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
         }
