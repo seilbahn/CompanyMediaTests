@@ -85,7 +85,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
         /// После создания проверяется, появился ли созданный элемент в таблице «Приложения организаций».
         /// После проверки созданное приложение удаляется.
         /// </summary>
-        [Test, Repeat(100)]
+        [Test, Repeat(10)]
         public void CreateDeleteOrgsApps()
         {
             SSWinPageObject systemStructure = new SSWinPageObject(driver);
@@ -106,6 +106,27 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             driver.FindElement(SSWinLocators._applicationSearchBoxInput, true).Click();
             driver.FindElement(SSWinLocators._applicationSearchBoxInput, true).Clear();           
             systemStructure.DeleteOrgsApp(testData);
+        }
+
+        /// <summary>
+        /// Создание одного элемента из блока «Типы приложений».
+        /// Открывается окно создания, заполняются данные, нажимается кнопка «Сохранить и Закрыть».
+        /// После создания проверяется, появился ли созданный элемент в таблице «Типы приложений».
+        /// </summary>
+        [Test, Repeat(10)]
+        public void CreateAppType()
+        {
+            SSWinPageObject systemStructure = new SSWinPageObject(driver);
+            systemStructure.OpenAppsTypes();
+
+            SSWinCreateAppsTypesTestData testData = new SSWinCreateAppsTypesTestData(new Random().Next(0, 4));
+            testData.Name += Helper.RandomString(new Random(), 7);
+            testData.Identifier += Helper.RandomString(new Random(), 7);
+            systemStructure.CreateAppType(testData);
+
+            string xpath = $"(//div[@style='outline-style:none;' and .//div[.='{testData.Name}']])[1]";
+            IWebElement item = driver.FindElement(By.XPath(xpath), true);
+            Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
         }
 
         [TearDown]

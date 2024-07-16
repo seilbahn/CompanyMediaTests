@@ -137,5 +137,35 @@ namespace CompanyMediaTests.PageObjects
 
             return new SSWinPageObject(_webDriver);
         }
+
+        internal SSWinPageObject OpenAppsTypes()
+        {
+            _webDriver.FindElement(LeftMainPanelLocators._SystemStructureBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._appsTypesBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
+
+        internal SSWinPageObject CreateAppType(SSWinCreateAppsTypesTestData testData)
+        {
+            _webDriver.FindElement(SSWinLocators._createBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._appNameInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._appNameInput, true).SendKeys(testData.Name);
+            _webDriver.FindElement(SSWinLocators._appIdentifierInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._appIdentifierInput, true).SendKeys(testData.Name);
+
+            if (testData.IsCorporate)
+            {
+                _webDriver.FindElement(SSWinLocators._isCorporativeChkBox, true).Click();
+            }
+            if (testData.IsWithModules)
+            {
+                _webDriver.FindElement(SSWinLocators._isWithModules, true).Click();
+            }
+
+            _webDriver.FindElement(SSWinLocators._saveAndCloseBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
     }
 }
