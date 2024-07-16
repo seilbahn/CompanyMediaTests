@@ -129,6 +129,25 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
         }
 
+        /// <summary>
+        /// Создание одного элемента из блока «Настройки Web-поиска».
+        /// Открывается окно создания, заполняются данные, нажимается кнопка «Сохранить и Закрыть».
+        /// После создания проверяется, появился ли созданный элемент в таблице «Настройки Web-поиска».
+        /// </summary>
+        [Test, Repeat(10)]
+        public void CreateWSS()
+        {
+            SSWinPageObject systemStructure = new SSWinPageObject(driver);
+            systemStructure.OpenWSS();
+
+            SSWinOrgsCreateWSSTestData testData = new SSWinOrgsCreateWSSTestData(new Random().Next(0, 2));
+            systemStructure.CreateWSS(testData);
+
+            string xpath = $"(//div[@style='outline-style:none;' and .//div[.='{testData.App}']])[1]";
+            IWebElement item = driver.FindElement(By.XPath(xpath), true);
+            Assert.That(driver.IsElementPresent(By.XPath(xpath)), Is.EqualTo(true), $"{item} was not found.");
+        }
+
         [TearDown]
         public void TearDown()
         {

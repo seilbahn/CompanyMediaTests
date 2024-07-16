@@ -167,5 +167,25 @@ namespace CompanyMediaTests.PageObjects
 
             return new SSWinPageObject(_webDriver);
         }
+
+        internal SSWinPageObject OpenWSS()
+        {
+            _webDriver.FindElement(LeftMainPanelLocators._SystemStructureBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._WSSBtn, true).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
+
+        internal SSWinPageObject CreateWSS(SSWinOrgsCreateWSSTestData testData)
+        {
+            _webDriver.FindElement(SSWinLocators._createBtn, true).Click();
+            _webDriver.FindElement(SSWinLocators._WSSAppInput, true).Click();
+            _webDriver.FindElement(SSWinLocators._WSSAppInput, true).SendKeys(testData.App);
+            string xpath = $"//td[contains(text(),'{testData.App}')]";
+            _webDriver.FindElement(By.XPath(xpath), true).Click();
+            _webDriver.FindElement(SSWinLocators._saveAndCloseBtn).Click();
+
+            return new SSWinPageObject(_webDriver);
+        }
     }
 }

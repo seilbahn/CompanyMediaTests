@@ -13,6 +13,7 @@ namespace CompanyMediaTests.Locators
         internal static readonly By _appsBtn = By.XPath("//div[@class='treeItemTitle' and text()='Приложения']");
         internal static readonly By _orgsAppsBtn = By.XPath("//div[@class='treeItemTitle' and text()='Приложения организаций']");
         internal static readonly By _appsTypesBtn = By.XPath("//div[@class='treeItemTitle' and text()='Типы приложений']");
+        internal static readonly By _WSSBtn = By.XPath("//div[@class='treeItemTitle' and text()='Настройки Web-поиска']");
 
         internal static readonly By _renewBtn = By.XPath("//a[@class='action-bar-button' and text()='Обновить']");
         internal static readonly By _createBtn = By.XPath("//a[@class='action-bar-button' and text()='Создать']");
@@ -69,5 +70,8 @@ namespace CompanyMediaTests.Locators
         internal static readonly By _appIdentifierInput = By.XPath("(//input[@type='text' and contains(@class, 'gwt-TextBox')])[2]");
         internal static readonly By _isCorporativeChkBox = By.XPath("(//input[@type='checkbox'])[1]");
         internal static readonly By _isWithModules = By.XPath("(//input[@type='checkbox'])[2]");
+
+        // Локаторы для подкатегории «Настройки Web-поиска»
+        internal static readonly By _WSSAppInput = By.XPath("(//input[@type='text' and contains(@class, 'gwt-SuggestBox')])[1]");
     }
 }
