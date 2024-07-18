@@ -3,7 +3,7 @@ using Serilog.Core;
 
 namespace CompanyMediaTests
 {
-    internal class Beaver
+    internal class Notetaker
     {
         public LoggerConfiguration LoggerConfiguration { get; set; }
 
@@ -11,7 +11,7 @@ namespace CompanyMediaTests
 
         public string Path { get; }
 
-        public Beaver(string logFilePath)
+        public Notetaker(string logFilePath)
         {
             Path = logFilePath;
             LoggerConfiguration = new LoggerConfiguration();

@@ -9,7 +9,7 @@ namespace CompanyMediaTests
     /// The class Driver is designed to implement added functionality
     /// to IWebDriver interface.<br/>
     /// At this moment there are these features:<br/>
-    /// 1) Logging via the class Beaver;<br/>
+    /// 1) Logging via the class Notetaker;<br/>
     /// 2) Waitings for a web element.<br/>
     /// For tests it's better to use this class,
     /// for the classes that implement PageObject pattern
@@ -20,11 +20,11 @@ namespace CompanyMediaTests
     internal class Driver : EventFiringWebDriver
     {
         /// <summary>
-        /// The reference to the Beaver class instance.<br/>
+        /// The reference to the Notetaker class instance.<br/>
         /// By default the log file is stored in the test project
         /// folder in My Documents.
         /// </summary>
-        public Beaver Logger { get; set; }
+        public Notetaker Notetaker { get; set; }
 
         /// <summary>
         /// The constructor initializes a new instance of the class Driver.<br/>
@@ -51,7 +51,7 @@ namespace CompanyMediaTests
             ScriptExecuting += new EventHandler<WebDriverScriptEventArgs>(Driver_ScriptExecuting);
             ScriptExecuted += new EventHandler<WebDriverScriptEventArgs>(Driver_ScriptExecuted);
             ExceptionThrown += new EventHandler<WebDriverExceptionEventArgs>(Driver_ExceptionThrown);
-            Logger = new Beaver(Path.Combine(Options.LogsDirectoryPath, Helper.RandomString(new Random(), 3)).ToString());
+            Notetaker = new Notetaker(Path.Combine(Options.LogsDirectoryPath, Helper.RandomString(new Random(), 3)).ToString());
         }
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace CompanyMediaTests
         /// The reference to the instance of the class that implements the interface IWebDriver.
         /// </param>
         /// <param name="logger">
-        /// The reference to the instance of the class Beaver.
+        /// The reference to the instance of the class Notetaker.
         /// </param>
-        public Driver(IWebDriver driver, Beaver logger) : this(driver)
+        public Driver(IWebDriver driver, Notetaker logger) : this(driver)
         {  
-            Logger = logger;
+            Notetaker = logger;
         }
 
         /// <summary>
@@ -101,94 +101,94 @@ namespace CompanyMediaTests
             }
             catch (NoSuchElementException nse)
             {
-                Logger.Logger.Error($"The web element {localor} was not found. {nse.Message}");
+                Notetaker.Logger.Error($"The web element {localor} was not found. {nse.Message}");
                 throw new NoSuchElementException(nse.Message);
             }            
         }
         
         private void Driver_Navigating(object? sender, WebDriverNavigationEventArgs e)
         {
-            Logger.Logger.Information($"Navigating to {e.Url}");
+            Notetaker.Logger.Information($"Navigating to {e.Url}");
         }
 
         private void Driver_Navigated(object? sender, WebDriverNavigationEventArgs e)
         {
-            Logger.Logger.Information($"Navigated to {e.Url}");
+            Notetaker.Logger.Information($"Navigated to {e.Url}");
         }
 
         private void Driver_NavigatingBack(object? sender, WebDriverNavigationEventArgs e)
         {
-            Logger.Logger.Information($"Navigating back to {e.Url}");
+            Notetaker.Logger.Information($"Navigating back to {e.Url}");
         }
 
         private void Driver_NavigatedBack(object? sender, WebDriverNavigationEventArgs e)
         {
-            Logger.Logger.Information($"Navigated back to {e.Url}");
+            Notetaker.Logger.Information($"Navigated back to {e.Url}");
         }
 
         private void Driver_NavigatingForward(object? sender, WebDriverNavigationEventArgs e)
         {
-            Logger.Logger.Information($"Navigating forward to {e.Url}");
+            Notetaker.Logger.Information($"Navigating forward to {e.Url}");
         }
 
         private void Driver_NavigatedForward(object? sender, WebDriverNavigationEventArgs e)
         {
-            Logger.Logger.Information($"Navigated forward to {e.Url}");
+            Notetaker.Logger.Information($"Navigated forward to {e.Url}");
         }
 
         private void Driver_ElementClicking(object? sender, WebElementEventArgs e)
         {
-            Logger.Logger.Information($"Clicking on the element {e.Element.TagName} {e.Element.Text}");
+            Notetaker.Logger.Information($"Clicking on the element {e.Element.TagName} {e.Element.Text}");
         }
 
         private void Driver_ElementClicked(object? sender, WebElementEventArgs e)
         {
-            Logger.Logger.Information($"Clicked on the element {e}");
+            Notetaker.Logger.Information($"Clicked on the element {e}");
         }
 
         private void Driver_ElementValueChanging(object? sender, WebElementValueEventArgs e)
         {
-            Logger.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changing. Expecting value: {e.Value}");
+            Notetaker.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changing. Expecting value: {e.Value}");
         }
 
         private void Driver_ElementValueChanged(object? sender, WebElementValueEventArgs e)
         {
-            Logger.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changed. New value: {e.Value}");
+            Notetaker.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changed. New value: {e.Value}");
         }
 
         private void Driver_FindingElement(object? sender, FindElementEventArgs e)
         {
-            Logger.Logger.Information($"Finding element: {e.FindMethod} {e.Element}");
+            Notetaker.Logger.Information($"Finding element: {e.FindMethod} {e.Element}");
         }
 
         private void Driver_FindElementCompleted(object? sender, FindElementEventArgs e)
         {
-            Logger.Logger.Information($"Find element completed: {e.FindMethod} {e.Element}");
+            Notetaker.Logger.Information($"Find element completed: {e.FindMethod} {e.Element}");
         }
 
         private void Driver_GettingShadowRoot(object? sender, GetShadowRootEventArgs e)
         {
-            Logger.Logger.Information($"Getting shadow root. {e.SearchContext}");
+            Notetaker.Logger.Information($"Getting shadow root. {e.SearchContext}");
         }
 
         private void Driver_GetShadowRootCompleted(object? sender, GetShadowRootEventArgs e)
         {
-            Logger.Logger.Information($"Get shadow root completed. {e.SearchContext}");
+            Notetaker.Logger.Information($"Get shadow root completed. {e.SearchContext}");
         }
 
         private void Driver_ScriptExecuting(object? sender, WebDriverScriptEventArgs e)
         {
-            Logger.Logger.Information($"Script executing: {e.Script}");
+            Notetaker.Logger.Information($"Script executing: {e.Script}");
         }
 
         private void Driver_ScriptExecuted(object? sender, WebDriverScriptEventArgs e)
         {
-            Logger.Logger.Information($"Script executed: {e.Script}");
+            Notetaker.Logger.Information($"Script executed: {e.Script}");
         }
 
         private void Driver_ExceptionThrown(object? sender, WebDriverExceptionEventArgs e)
         {
-            Logger.Logger.Error($"Message: {e.ThrownException.Message}\nStack trace:\n{e.ThrownException.StackTrace}");
+            Notetaker.Logger.Error($"Message: {e.ThrownException.Message}\nStack trace:\n{e.ThrownException.StackTrace}");
         }
     }
 }

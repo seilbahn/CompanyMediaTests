@@ -40,10 +40,10 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             string logDirectoryName = TestContext.CurrentContext.Test.ClassName!.ToString();
             string logMethodDirectoryName = TestContext.CurrentContext.Test.MethodName!.ToString();
             string pathToLogFile = Path.Combine(Options.LogsDirectoryPath, logDirectoryName, logMethodDirectoryName, logFileName);
-            Beaver logger = new Beaver(pathToLogFile);
+            Notetaker logger = new Notetaker(pathToLogFile);
 
             driver = new Driver(webDriver, logger);
-            driver.Logger.Logger.Information($"Start. Method name: {TestContext.CurrentContext.Test.FullName}");
+            driver.Notetaker.Logger.Information($"Start. Method name: {TestContext.CurrentContext.Test.FullName}");
             driver.Manage().Window.Maximize();
         }
 
@@ -183,7 +183,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
         [TearDown]
         public void TearDown()
         {
-            driver.Logger.Logger.Information($"Final. Method name: {TestContext.CurrentContext.Test.FullName}");
+            driver.Notetaker.Logger.Information($"Final. Method name: {TestContext.CurrentContext.Test.FullName}");
             webDriver.Dispose();
             driver.Dispose();
 
@@ -191,7 +191,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                       TestContext.CurrentContext.CurrentRepeatCount,
                       TestContext.CurrentContext.Test.Name,
                       TestContext.CurrentContext.Result.Outcome.ToString()!,
-                      driver.Logger.Path));
+                      driver.Notetaker.Path));
         }
 
         [OneTimeTearDown]
