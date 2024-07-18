@@ -43,7 +43,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
             Beaver logger = new Beaver(pathToLogFile);
 
             driver = new Driver(webDriver, logger);
-            driver.Log.Logger.Information($"Start. Method name: {TestContext.CurrentContext.Test.FullName}");
+            driver.Logger.Logger.Information($"Start. Method name: {TestContext.CurrentContext.Test.FullName}");
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl(CompanyMediaWebUrls.LogInPageUrl);
@@ -194,7 +194,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
         [TearDown]
         public void TearDown()
         {
-            driver.Log.Logger.Information($"Final. Method name: {TestContext.CurrentContext.Test.FullName}");
+            driver.Logger.Logger.Information($"Final. Method name: {TestContext.CurrentContext.Test.FullName}");
             webDriver.Dispose();
             driver.Dispose();
 
@@ -202,7 +202,7 @@ namespace CompanyMediaTests.CompanyMediaPageTests
                       TestContext.CurrentContext.CurrentRepeatCount,
                       TestContext.CurrentContext.Test.Name,
                       TestContext.CurrentContext.Result.Outcome.ToString()!,
-                      driver.Log.Path));
+                      driver.Logger.Path));
         }
 
         [OneTimeTearDown]

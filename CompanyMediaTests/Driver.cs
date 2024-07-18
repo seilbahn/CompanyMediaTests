@@ -5,11 +5,31 @@ using CompanyMediaTests.Utility;
 
 namespace CompanyMediaTests
 {
+    /// <summary>
+    /// The class Driver is designed to implement some functionality
+    /// to IWebDriver interface.<br/>
+    /// At this moment there are these features:<br/>
+    /// 1) Logging via the class Beaver;<br/>
+    /// 2) Waitings for a web element.<br/>
+    /// For tests it's better to use this class,
+    /// for PageObject classes it's recommend to use the basic IWebDriver interface.
+    /// </summary>
     internal class Driver : EventFiringWebDriver
     {
-        public Beaver Log { get; set; }
+        /// <summary>
+        /// The reference to the Beaver class instance.<br/>
+        /// By default the log file is stored in the test project
+        /// folder in My Documents.
+        /// </summary>
+        public Beaver Logger { get; set; }
 
-        public Driver(IWebDriver parentDriver, Beaver logger) : base(parentDriver)
+        /// <summary>
+        /// The constructor initializes a new instance of the class Driver.<br/>
+        /// </summary>
+        /// <param name="driver">
+        /// The reference to the instance of the class that implements the interface IWebDriver.
+        /// </param>
+        public Driver(IWebDriver driver) : base(driver)
         {
             Navigating += new EventHandler<WebDriverNavigationEventArgs>(Driver_Navigating);
             Navigated += new EventHandler<WebDriverNavigationEventArgs>(Driver_Navigated);
@@ -28,10 +48,27 @@ namespace CompanyMediaTests
             ScriptExecuting += new EventHandler<WebDriverScriptEventArgs>(Driver_ScriptExecuting);
             ScriptExecuted += new EventHandler<WebDriverScriptEventArgs>(Driver_ScriptExecuted);
             ExceptionThrown += new EventHandler<WebDriverExceptionEventArgs>(Driver_ExceptionThrown);
-
-            Log = logger;
+            Logger = new Beaver(Path.Combine(Options.LogsDirectoryPath, Helper.RandomString(new Random(), 3)).ToString());
         }
 
+        /// <summary>
+        /// The constructor initializes a new instance of the class Driver.<br/>
+        /// </summary>
+        /// <param name="driver">
+        /// The reference to the instance of the class that implements the interface IWebDriver.
+        /// </param>
+        /// <param name="logger">
+        /// The reference to the instance of the class Beaver.
+        /// </param>
+        public Driver(IWebDriver driver, Beaver logger) : this(driver)
+        {  
+            Logger = logger;
+        }
+
+        /// <summary>
+        /// The method WaitDocumentReadyState creates a maximum delay of 10 seconds
+        /// until the script document.readyState is executed.
+        /// </summary>
         public void WaitDocumentReadyState()
         {
             _ = Manage().Timeouts().ImplicitWait;
@@ -39,6 +76,19 @@ namespace CompanyMediaTests
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
 
+        /// <summary>
+        /// The method IsElementPresent checks if there is a specified web element on the web page or not.
+        /// </summary>
+        /// <param name="localor">The locator of the searched web element.</param>
+        /// <returns>
+        /// True - if the specified web element is present on the web page.<br/>
+        /// False - if the specified web element is absent on the web page.
+        /// </returns>
+        /// <exception cref="NoSuchElementException">
+        /// If the specified web element is absent on the web page then
+        /// the method throws the exception NoSuchElementException
+        /// and logs the exception NoSuchElementException with the status Error.<br/>
+        /// </exception>
         public bool IsElementPresent(By localor)
         {
             try
@@ -48,94 +98,94 @@ namespace CompanyMediaTests
             }
             catch (NoSuchElementException nse)
             {
-                Log.Logger.Error($"The web element {localor} was not found. {nse.Message}");
+                Logger.Logger.Error($"The web element {localor} was not found. {nse.Message}");
                 throw new NoSuchElementException(nse.Message);
             }            
         }
         
         private void Driver_Navigating(object? sender, WebDriverNavigationEventArgs e)
         {
-            Log.Logger.Information($"Navigating to {e.Url}");
+            Logger.Logger.Information($"Navigating to {e.Url}");
         }
 
         private void Driver_Navigated(object? sender, WebDriverNavigationEventArgs e)
         {
-            Log.Logger.Information($"Navigated to {e.Url}");
+            Logger.Logger.Information($"Navigated to {e.Url}");
         }
 
         private void Driver_NavigatingBack(object? sender, WebDriverNavigationEventArgs e)
         {
-            Log.Logger.Information($"Navigating back to {e.Url}");
+            Logger.Logger.Information($"Navigating back to {e.Url}");
         }
 
         private void Driver_NavigatedBack(object? sender, WebDriverNavigationEventArgs e)
         {
-            Log.Logger.Information($"Navigated back to {e.Url}");
+            Logger.Logger.Information($"Navigated back to {e.Url}");
         }
 
         private void Driver_NavigatingForward(object? sender, WebDriverNavigationEventArgs e)
         {
-            Log.Logger.Information($"Navigating forward to {e.Url}");
+            Logger.Logger.Information($"Navigating forward to {e.Url}");
         }
 
         private void Driver_NavigatedForward(object? sender, WebDriverNavigationEventArgs e)
         {
-            Log.Logger.Information($"Navigated forward to {e.Url}");
+            Logger.Logger.Information($"Navigated forward to {e.Url}");
         }
 
         private void Driver_ElementClicking(object? sender, WebElementEventArgs e)
         {
-            Log.Logger.Information($"Clicking on the element {e.Element.TagName} {e.Element.Text}");
+            Logger.Logger.Information($"Clicking on the element {e.Element.TagName} {e.Element.Text}");
         }
 
         private void Driver_ElementClicked(object? sender, WebElementEventArgs e)
         {
-            Log.Logger.Information($"Clicked on the element {e}");
+            Logger.Logger.Information($"Clicked on the element {e}");
         }
 
         private void Driver_ElementValueChanging(object? sender, WebElementValueEventArgs e)
         {
-            Log.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changing. Expecting value: {e.Value}");
+            Logger.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changing. Expecting value: {e.Value}");
         }
 
         private void Driver_ElementValueChanged(object? sender, WebElementValueEventArgs e)
         {
-            Log.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changed. New value: {e.Value}");
+            Logger.Logger.Information($"Element {e.Element.TagName} {e.Element.Text} value changed. New value: {e.Value}");
         }
 
         private void Driver_FindingElement(object? sender, FindElementEventArgs e)
         {
-            Log.Logger.Information($"Finding element: {e.FindMethod} {e.Element}");
+            Logger.Logger.Information($"Finding element: {e.FindMethod} {e.Element}");
         }
 
         private void Driver_FindElementCompleted(object? sender, FindElementEventArgs e)
         {
-            Log.Logger.Information($"Find element completed: {e.FindMethod} {e.Element}");
+            Logger.Logger.Information($"Find element completed: {e.FindMethod} {e.Element}");
         }
 
         private void Driver_GettingShadowRoot(object? sender, GetShadowRootEventArgs e)
         {
-            Log.Logger.Information($"Getting shadow root. {e.SearchContext}");
+            Logger.Logger.Information($"Getting shadow root. {e.SearchContext}");
         }
 
         private void Driver_GetShadowRootCompleted(object? sender, GetShadowRootEventArgs e)
         {
-            Log.Logger.Information($"Get shadow root completed. {e.SearchContext}");
+            Logger.Logger.Information($"Get shadow root completed. {e.SearchContext}");
         }
 
         private void Driver_ScriptExecuting(object? sender, WebDriverScriptEventArgs e)
         {
-            Log.Logger.Information($"Script executing: {e.Script}");
+            Logger.Logger.Information($"Script executing: {e.Script}");
         }
 
         private void Driver_ScriptExecuted(object? sender, WebDriverScriptEventArgs e)
         {
-            Log.Logger.Information($"Script executed: {e.Script}");
+            Logger.Logger.Information($"Script executed: {e.Script}");
         }
 
         private void Driver_ExceptionThrown(object? sender, WebDriverExceptionEventArgs e)
         {
-            Log.Logger.Error($"Message: {e.ThrownException.Message}\nStack trace:\n{e.ThrownException.StackTrace}");
+            Logger.Logger.Error($"Message: {e.ThrownException.Message}\nStack trace:\n{e.ThrownException.StackTrace}");
         }
     }
 }
