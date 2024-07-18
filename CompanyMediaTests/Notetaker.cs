@@ -14,7 +14,6 @@ namespace CompanyMediaTests
         /// </summary>
         public LoggerConfiguration Configuration { get; set; }
 
-
         /// <summary>
         /// The reference to the class Logger.
         /// </summary>
@@ -24,7 +23,6 @@ namespace CompanyMediaTests
         /// The path to the log file.
         /// </summary>
         public string Path { get; set; }
-
 
         /// <summary>
         /// The constructor initializes a new instance of the class Notetaker.<br/>
