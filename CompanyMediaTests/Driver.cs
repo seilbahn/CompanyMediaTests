@@ -6,13 +6,16 @@ using CompanyMediaTests.Utility;
 namespace CompanyMediaTests
 {
     /// <summary>
-    /// The class Driver is designed to implement some functionality
+    /// The class Driver is designed to implement added functionality
     /// to IWebDriver interface.<br/>
     /// At this moment there are these features:<br/>
     /// 1) Logging via the class Beaver;<br/>
     /// 2) Waitings for a web element.<br/>
     /// For tests it's better to use this class,
-    /// for PageObject classes it's recommend to use the basic IWebDriver interface.
+    /// for the classes that implement PageObject pattern
+    /// it's recommend to use the basic IWebDriver interface.<br/>
+    /// If there is no needed feature, the one may be implemented here,
+    /// or via creating a new one class.
     /// </summary>
     internal class Driver : EventFiringWebDriver
     {
